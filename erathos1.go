@@ -34,7 +34,10 @@ func (e eratos1) GeneratePrimes(n int) []uint {
 	// square root of the highest number
 	for i, c := range isComposed {
 		m := e.iToN(uint(i))
-		if !c && m <= sq {
+		if m > sq {
+			break
+		}
+		if !c {
 			for k := 2 * m; k <= max; k = k + m {
 				isComposed[e.nToI(k)] = true
 			}

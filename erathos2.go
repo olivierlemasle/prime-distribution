@@ -1,5 +1,9 @@
 package main
 
+import (
+	"math"
+)
+
 // This is an optimization of "erathos1", where only the integers which
 // are not multiple of 2 and 3 are considered.
 
@@ -29,6 +33,9 @@ func (e eratos2) GeneratePrimes(n int) []uint {
 	// Highest number in the sieve
 	max := (e.max/6)*6 + 5
 
+	// Its square root
+	sq := uint(math.Sqrt(float64(max)))
+
 	// Slice of booleans used to mark composed numbers.
 	isComposed := make([]bool, e.nToI(max)+1)
 
@@ -36,6 +43,9 @@ func (e eratos2) GeneratePrimes(n int) []uint {
 	// square root of the highest number
 	for i, c := range isComposed {
 		m := e.iToN(uint(i))
+		if m > sq {
+			break
+		}
 		if !c {
 			for k := m * m; k <= max; k = k + m {
 				if k%2 != 0 && k%3 != 0 {

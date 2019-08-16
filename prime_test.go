@@ -32,8 +32,8 @@ var generators = []struct {
 	generator PrimeGenerator
 }{
 	{"go-probably-prime", NewGoProbablyPrime()},
-	{"eratos1", eratos1{1000000}},
-	{"eratos2", eratos2{1000000}},
+	{"eratos1", eratos1{2000000}},
+	{"eratos2", eratos2{2000000}},
 }
 
 // uintSlice attaches the methods of sort.Interface to []uint, sorting in increasing order.
@@ -44,7 +44,7 @@ func (p uintSlice) Less(i, j int) bool { return p[i] < p[j] }
 func (p uintSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
 func TestPrimes(t *testing.T) {
-	n := 10000
+	n := 100000
 
 	expectedPrimes := NewGoProbablyPrime().GeneratePrimes(n)
 
@@ -80,7 +80,7 @@ func TestPrimes(t *testing.T) {
 var result []uint
 
 func BenchmarkPrimes(b *testing.B) {
-	n := 10000
+	n := 100000
 
 	for _, gen := range generators {
 		b.Run(gen.name, func(b *testing.B) {
