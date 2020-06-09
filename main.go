@@ -3,16 +3,19 @@ package main
 import (
 	"fmt"
 	"time"
+
+	"github.com/olivierlemasle/prime-distribution/generation"
 )
 
 func main() {
-	n := 100000004 // number of prime numbers
+	// number of prime numbers
+	n := 100_000_004
+
+	// size of the sieve
+	max := uint(2_050_000_000)
 
 	t1 := time.Now()
-	e := eratos2{
-		max: 2350000000, // size of the sieve
-	}
-	p := e.GeneratePrimes(n)
+	p := generation.NewErathos2(max).GeneratePrimes(n)
 	t2 := time.Now()
 	fmt.Printf("Primes generation took %v\n", t2.Sub(t1))
 

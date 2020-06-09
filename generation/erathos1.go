@@ -1,10 +1,14 @@
-package main
+package generation
 
 import (
 	"math"
 )
 
-// First naive implementation of the Sieve of Eratosthenes
+// NewErathos1 creates a prime generator with a naive
+// implementation of the Sieve of Eratosthenes of a given size.
+func NewErathos1(max uint) PrimeGenerator {
+	return eratos1{max}
+}
 
 type eratos1 struct {
 	max uint
@@ -38,7 +42,7 @@ func (e eratos1) GeneratePrimes(n int) []uint {
 			break
 		}
 		if !c {
-			for k := 2 * m; k <= max; k = k + m {
+			for k := m * m; k <= max; k = k + m {
 				isComposed[e.nToI(k)] = true
 			}
 		}

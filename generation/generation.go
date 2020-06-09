@@ -1,4 +1,4 @@
-package main
+package generation
 
 // PrimeGenerator generates the list of n first prime numbers
 type PrimeGenerator interface {

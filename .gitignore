@@ -4,6 +4,7 @@
 *.so
 *.dylib
 *.test
+*.prof
 *.out
 prime-distribution
 prime-distribution-*
