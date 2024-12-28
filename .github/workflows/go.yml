@@ -26,6 +26,9 @@ jobs:
       - name: Test
         run: go test -v ./...
 
+      - name: Run benchmarks
+        run: go test -bench=. ./...
+
       - name: Build
         run: go build -o prime-distribution-${{ matrix.os.name }}
 
