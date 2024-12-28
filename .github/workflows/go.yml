@@ -1,0 +1,36 @@
+name: go
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  go:
+    strategy:
+      matrix:
+        os:
+          - name: linux
+            runner: ubuntu-latest
+          - name: macos
+            runner: macos-latest
+
+    runs-on: ${{ matrix.os.runner }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Build
+        run: go build -o prime-distribution-${{ matrix.os.name }}
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: prime-distribution-${{ matrix.os.name }}
+          path: prime-distribution-${{ matrix.os.name }}
